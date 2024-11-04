@@ -1,0 +1,23 @@
+<div class="search-bar">
+  <input type="text" placeholder="Search events by name, organizer, prize money, or date" [(ngModel)]="searchQuery">
+  <button (click)="performSearch()">Search</button>
+</div>
+
+<div class="events-container">
+  <!-- Display filtered events if searchResults are populated, else display all events -->
+  <div 
+    *ngFor="let event of (searchResults.length ? searchResults : events)" 
+    class="event-card"
+    [ngStyle]="{  'background-size': 'cover' }">
+    <div class="event-content">
+      <h2>{{ event.eventname }}</h2>
+      <p><strong>Organizer:</strong> {{ event.organizername }}</p>
+      <p><strong>Description:</strong> {{ event.description }}</p>
+      <p><strong>Prize Money:</strong> {{ event.prizemoney | currency }}</p>
+      <p><strong>Location:</strong> {{ event.location }}</p>
+      <p><strong>Date:</strong> {{ event.date | date }}</p>
+      <p><strong>Time:</strong> {{ event.time }}</p>
+      <button (click)="registerEvent(event.eventname)">Register</button>
+    </div>
+  </div>
+</div>
